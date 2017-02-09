@@ -16,4 +16,4 @@ Route::get('/', function () {
 });
 
 
-Route::get('callBack', 'BotController@callBack');
+Route::get('/callBack', 'BotController@callBack');
