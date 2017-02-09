@@ -14,7 +14,7 @@ class botController extends Controller
 
     public function callBack()
     {
-        File::put(base_path() . '/report.txt', 'test');
+        file_put_contents("php://stderr", "hello, this is a test!\n");
         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('CHANNEL_ACCESS_TOKEN'));
         $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('CHANNEL_SECRET')]);
 
