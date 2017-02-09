@@ -22,7 +22,7 @@ class botController extends Controller
         $jsonString = file_get_contents('php://input');
         $jsonObject = json_decode($jsonString);
 
-        $bot->sendText(1500404216, 'test');
+        $bot->sendText([1500404216], 'test');
 
     }
 }
