@@ -13,9 +13,9 @@ class botController extends Controller
 
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
         $response = $bot->replyMessage('<reply token>', $textMessageBuilder);
+
         if ($response->isSucceeded()) {
-            return 'Succeeded!';
-            return;
+            return $response->getJSONDecodedBody();
         }
 
         // Failed
