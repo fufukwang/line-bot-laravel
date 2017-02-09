@@ -22,5 +22,7 @@ class botController extends Controller
         $jsonString = file_get_contents('php://input');
         $jsonObject = json_decode($jsonString);
 
+        var_dump($jsonObject);
+
     }
 }
