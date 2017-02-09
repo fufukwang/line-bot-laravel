@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Log;
 
 class botController extends Controller
 {
+    public function test()
+    {
+
+    }
+
     public function callBack()
     {
         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('CHANNEL_ACCESS_TOKEN'));
@@ -14,11 +20,13 @@ class botController extends Controller
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
         $response = $bot->replyMessage('<reply token>', $textMessageBuilder);
 
-        if ($response->isSucceeded()) {
-            return $response->getJSONDecodedBody();
+        $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+        $body = file_get_contents("php://input");
+        try {
+          $events = $bot->parseEventRequest($body, $signature);
+          Log::info($events);
+        } catch (Exception $e) {
+          var_dump($e); //錯誤內容
         }
-
-        // Failed
-        return $response->getHTTPStatus() . ' ' . $response->getRawBody();
     }
 }
