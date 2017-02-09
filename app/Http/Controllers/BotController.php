@@ -14,11 +14,11 @@ class botController extends Controller
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
         $response = $bot->replyMessage('<reply token>', $textMessageBuilder);
         if ($response->isSucceeded()) {
-            echo 'Succeeded!';
+            return 'Succeeded!';
             return;
         }
 
         // Failed
-        echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+        return $response->getHTTPStatus() . ' ' . $response->getRawBody();
     }
 }
