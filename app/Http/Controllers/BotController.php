@@ -22,12 +22,5 @@ class botController extends Controller
         $jsonString = file_get_contents('php://input');
         $jsonObject = json_decode($jsonString);
 
-        //取得MID
-        $targetMID = $jsonObject->{"result"}[0]->{"content"}->{"from"};
-        //取得訊息
-        $message = $jsonObject->{"result"}[0]->{"content"}->{"text"};
-
-        $bot->sendText([$targetMID], $message);
-
     }
 }
