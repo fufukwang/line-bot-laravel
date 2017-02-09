@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use File;
 
 class botController extends Controller
 {
@@ -16,11 +17,14 @@ class botController extends Controller
         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('CHANNEL_ACCESS_TOKEN'));
         $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('CHANNEL_SECRET')]);
 
-        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
-        $response = $bot->replyMessage('<reply token>', $textMessageBuilder);
-
-        $jsonString = file_get_contents('php://input');
-        $jsonObject = json_decode($jsonString);
+        $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+        $body = file_get_contents("php://input");
+        try {
+          $events = $bot->parseEventRequest($body, $signature);
+          File::put(base_path() . '/report.txt', $events);
+        } catch (Exception $e) {
+          File::put(base_path() . '/report.txt', $e); //錯誤內容
+        }
 
     }
 }
