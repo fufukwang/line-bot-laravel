@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Log;
 
 class botController extends Controller
 {
@@ -20,13 +19,15 @@ class botController extends Controller
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
         $response = $bot->replyMessage('<reply token>', $textMessageBuilder);
 
-        $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-        $body = file_get_contents("php://input");
-        try {
-          $events = $bot->parseEventRequest($body, $signature);
-          Log::info($events);
-        } catch (Exception $e) {
-          var_dump($e); //錯誤內容
-        }
+        $jsonString = file_get_contents('php://input');
+        $jsonObject = json_decode($jsonString);
+
+        //取得MID
+        $targetMID = $jsonObject->{"result"}[0]->{"content"}->{"from"};
+        //取得訊息
+        $message = $jsonObject->{"result"}[0]->{"content"}->{"text"};
+
+        $bot->sendText([$targetMID], $message);
+
     }
 }
