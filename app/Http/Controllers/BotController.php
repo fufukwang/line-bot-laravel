@@ -97,10 +97,13 @@ class botController extends Controller
     public function funny($typeName)
     {
         switch ($typeName) {
-            case 540:
+            case '540':
                 return 487;
             case "老公存款":
                 return '八億七千萬';
+            case "quni":
+            case "Quni":
+                return '負二代';
             case "岳群存款":
                 return '八七日圓';
             case "540存款":
