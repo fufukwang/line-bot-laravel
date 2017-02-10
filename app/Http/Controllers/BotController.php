@@ -55,9 +55,10 @@ class botController extends Controller
      */
     public function changeName($typeName, $sourceData)
     {
-        //XDD
-        if ($typeName == '540') {
-            return '487';
+        //XDD have fun
+        $funny = $this->funny($typeName);
+        if ( ! empty($funny)) {
+            return $funny;
         }
 
         switch ($typeName) {
@@ -90,5 +91,15 @@ class botController extends Controller
         $txt .= "更新時間 : " . Carbon::createFromTimestamp($sourceData->updateTime)->format('Y-m-d H:i:s');
 
         return $txt;
+    }
+
+    public function funny($typeName)
+    {
+        switch ($typeName) {
+            case 540:
+                return 487;
+            default:
+                return '';
+        }
     }
 }
