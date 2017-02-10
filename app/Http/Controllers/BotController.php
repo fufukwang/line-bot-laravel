@@ -99,6 +99,8 @@ class botController extends Controller
         switch ($typeName) {
             case 540:
                 return 487;
+            case "老公存款":
+                return '八億七千萬';
             case '安安 惠律姐':
                 return '幹麻 裝熟？';
             default:
