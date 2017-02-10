@@ -173,6 +173,8 @@ class botController extends Controller
                 return '負二代の老公';
             case "岳群存款":
                 return '八七日圓';
+            case "岳群":
+                return 'https://www.facebook.com/photo.php?fbid=923651404318896&set=t.100000107019242&type=3&theater';
             case "RAIDEN":
                 return '台灣雲端運算首席專案經理';
             case "540存款":
