@@ -30,15 +30,17 @@ class botController extends Controller
         $replyToken = $decode->events[0]->replyToken;
         $mid = $decode->events[0]->message->id;
         $text = $decode->events[0]->message->text;
-        file_put_contents("php://stderr", "$text".PHP_EOL);
+
         //api
-        /*$content = file_get_contents('http://asper-bot-rates.appspot.com/currency.json');
+        $content = file_get_contents('http://asper-bot-rates.appspot.com/currency.json');
         $currency = json_decode($content);
+
         $result = $this->changeName($text, $currency);
 
-        file_put_contents("php://stderr", "$text".PHP_EOL);
+        file_put_contents("php://stderr", "in".PHP_EOL);
+        file_put_contents("php://stderr", "$content".PHP_EOL);
 
-        if ( ! empty($result) {
+        /*if ( ! empty($result) {
             //send
             foreach ($result as $key => $value) {
                 $sendMsg = $key . " : " . $value;
