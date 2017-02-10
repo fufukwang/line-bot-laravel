@@ -36,11 +36,9 @@ class botController extends Controller
         $currency = json_decode($content);
 
         $result = $this->changeName($text, $currency);
-
+        file_put_contents("php://stderr", "json_encode($result)".PHP_EOL);
         file_put_contents("php://stderr", "in".PHP_EOL);
-        file_put_contents("php://stderr", "$content".PHP_EOL);
-
-        /*if ( ! empty($result) {
+        if ( ! empty($result) {
             //send
             foreach ($result as $key => $value) {
                 $sendMsg = $key . " : " . $value;
@@ -48,7 +46,7 @@ class botController extends Controller
                 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($sendMsg);
                 $response = $bot->replyMessage($replyToken, $textMessageBuilder);
             }
-        }*/
+        }
     }
 
     /*
