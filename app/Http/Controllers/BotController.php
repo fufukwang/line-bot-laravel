@@ -20,7 +20,8 @@ class botController extends Controller
         file_put_contents("php://stderr", "in".PHP_EOL);
         try {
             $events = $bot->parseEventRequest($body, $signature);
-            file_put_contents("php://stderr", "$events".PHP_EOL);
+            $json = json_encode($events);
+            file_put_contents("php://stderr", "$json".PHP_EOL);
         } catch (Exception $e) {
             file_put_contents("php://stderr", "$e".PHP_EOL);
         }
