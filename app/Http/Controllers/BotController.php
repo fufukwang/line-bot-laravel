@@ -174,8 +174,13 @@ class botController extends Controller
             case "岳群存款":
                 return '八七日圓';
             case "岳群":
-                return 'https://www.facebook.com/photo.php?fbid=923651404318896&set=t.100000107019242&type=3&theater';
             case "RAIDEN":
+            case "群":
+            case "群兒":
+            case "夯":
+            case "夯神":
+            case "月月":
+            case "岳岳":
                 return '前台灣雲端運算股份有限公司首席專案經理 大里fit車神 現任統一企業股份有限公司 大平台維護專員';
             case "五四零":
                 return 'https://www.facebook.com/photo.php?fbid=10152956691594145&set=pb.729219144.-2207520000.1486717409.&type=3&theater';
