@@ -9,6 +9,7 @@ class botController extends Controller
 {
     public function test()
     {
+        //test string
         $lineTestString = '{"events":[{"type":"message","replyToken":"e593a9cc1e834791bf8076f6ff8ec116","source":{"userId":"U7cbf49ac38f334e5977af0d737c5bae0","type":"user"},"timestamp":1486692739451,"message":{"type":"text","id":"5625522229919","text":"22"}}]}';
     }
 
@@ -98,6 +99,8 @@ class botController extends Controller
         switch ($typeName) {
             case 540:
                 return 487;
+            case '安安 惠律姐':
+                return '幹麻 裝熟？';
             default:
                 return '';
         }
