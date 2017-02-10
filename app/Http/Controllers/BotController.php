@@ -22,6 +22,7 @@ class botController extends Controller
 
         $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
         $body = file_get_contents("php://input");
+        file_put_contents("php://stderr", "json_decode($body)".PHP_EOL);
 
         try {
             $events = $bot->parseEventRequest($body, $signature);
