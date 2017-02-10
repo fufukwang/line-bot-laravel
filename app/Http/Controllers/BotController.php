@@ -178,7 +178,7 @@ class botController extends Controller
             case "RAIDEN":
                 return '台灣雲端運算首席專案經理';
             case "五四零":
-                return 'https://www.facebook.com/photo.php?fbid=10153504838809145&set=pb.729219144.-2207520000.1486715937.&type=3&theater';
+                return 'https://www.facebook.com/photo.php?fbid=10152956691594145&set=pb.729219144.-2207520000.1486717409.&type=3&theater';
             case "540存款":
                 return '九四八七日圓';
             case '安安 惠律姐':
