@@ -168,6 +168,8 @@ class botController extends Controller
             case "老公存款":
                 return '八億七千萬';
             case "QUNI":
+                return '負二代の老公';
+            case "CHIUKO":
                 return '負二代';
             case "岳群存款":
                 return '八七日圓';
