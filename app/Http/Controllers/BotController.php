@@ -11,6 +11,14 @@ class botController extends Controller
     {
         //test string
         $lineTestString = '{"events":[{"type":"message","replyToken":"e593a9cc1e834791bf8076f6ff8ec116","source":{"userId":"U7cbf49ac38f334e5977af0d737c5bae0","type":"user"},"timestamp":1486692739451,"message":{"type":"text","id":"5625522229919","text":"22"}}]}';
+
+
+        //api
+        $content = file_get_contents('http://asper-bot-rates.appspot.com/currency.json');
+        $currency = json_decode($content);
+
+        $result = $this->changeName('韓幣', $currency);
+        dd($result);
     }
 
     public function callBack()
@@ -55,7 +63,17 @@ class botController extends Controller
      */
     public function changeName($typeName, $sourceData)
     {
+        //XDD have fun
+        $funny = $this->funny($typeName);
+        if ( ! empty($funny)) {
+            return $funny;
+        }
 
+        //麻將
+        $maJohn = $this->maJohn($typeName);
+        if ( ! empty($maJohn)) {
+            return $maJohn;
+        }
 
         switch ($typeName) {
             case '日幣':
@@ -106,6 +124,13 @@ class botController extends Controller
                 return '';
         }
 
+        //check zero
+        if ($money->buySpot == 0) {
+            $round = '無資料';
+        } else {
+            $round = round(1 / $money->buySpot, 4);
+        }
+
         //to string
         $txt = "買入現金 : " . $money->buyCash;
         $txt .= "\n";
@@ -115,7 +140,7 @@ class botController extends Controller
         $txt .= "\n";
         $txt .= "賣出即期 : " . $money->sellSpot;
         $txt .= "\n";
-        $txt .= "所以買入一台幣 = " . round(1 / $money->buySpot, 5) . $typeName;
+        $txt .= "所以買入一台幣 = " . $round . $typeName;
         $txt .= "\n";
         $txt .= "\n";
         $txt .= "懂嗎 孩子？";
