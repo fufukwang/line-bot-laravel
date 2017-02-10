@@ -37,6 +37,6 @@ class botController extends Controller
         file_put_contents("php://stderr", "$mid".PHP_EOL);
         file_put_contents("php://stderr", "$text".PHP_EOL);
 
-        $bot->sendText($mid, $text);
+        $bot->sendText($replyToken, $text);
     }
 }
