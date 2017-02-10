@@ -37,7 +37,8 @@ class botController extends Controller
 
         $result = $this->changeName($text, $currency);
         file_put_contents("php://stderr", "$text".PHP_EOL);
-        file_put_contents("php://stderr", "json_encode($result)".PHP_EOL);
+        $encode = json_encode($result);
+        file_put_contents("php://stderr", "$decode".PHP_EOL);
 
         /*if ( ! empty($result)) {
             //send
@@ -58,7 +59,7 @@ class botController extends Controller
     public function changeName($typeName, $sourceData)
     {
         switch ($typeName) {
-            case "日幣":
+            case '日幣':
                 $money = $sourceData->rates->JPY;
 
                 return [
