@@ -40,12 +40,16 @@ class botController extends Controller
 
         if ( ! empty($result)) {
             //send
+            $msg = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
+
             foreach ($result as $key => $value) {
                 $sendMsg = $key . " : " . $value;
                 file_put_contents("php://stderr", "$sendMsg".PHP_EOL);
                 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($sendMsg);
-                $response = $bot->replyMessage($replyToken, $textMessageBuilder);
+                $msg->add($replyToken, $textMessageBuilder);
             }
+
+            $bot->replyMessage($replyToken, $msg);
         }
     }
 
