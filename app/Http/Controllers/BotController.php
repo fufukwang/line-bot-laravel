@@ -69,7 +69,7 @@ class botController extends Controller
                 $txt .= '\n';
                 $txt .= '更新時間 : ' . Carbon::createFromTimestamp($sourceData->updateTime)->format('Y-m-d H:i:s');
 
-                return '買\n入\n現\n金';
+                return '買 \n 入 \n 現 \n 金';
 
             default:
                 return '';
