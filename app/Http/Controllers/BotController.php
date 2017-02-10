@@ -43,7 +43,6 @@ class botController extends Controller
 
         if ( ! empty($result)) {
             //send
-            file_put_contents("php://stderr", "$result".PHP_EOL);
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($result);
             $bot->replyMessage($replyToken, $textMessageBuilder);
         }
@@ -52,7 +51,7 @@ class botController extends Controller
     /*
      * 美元(USD) 港幣(HKD) 英鎊(GBP) 澳幣(AUD) 加拿大幣(CAD) 新加坡幣(SGD) 瑞士法郎(CHF)
      * 日圓(JPY) 南非幣(ZAR) 瑞典克朗(SEK) 紐西蘭幣(NZD) 泰銖(THB) 菲律賓披索(PHP)
-     * 印尼盾(IDR) 歐元(EUR) 菲律賓披索(KRW) 越南幣(VND) 馬來西亞幣(MYR) 人民幣(CNY)
+     * 印尼盾(IDR) 歐元(EUR) 韓幣(KRW) 越南幣(VND) 馬來西亞幣(MYR) 人民幣(CNY)
      */
     public function changeName($typeName, $sourceData)
     {
@@ -129,7 +128,7 @@ class botController extends Controller
         $txt .= "所以買入一台幣 = " . round(1 / $money->buySpot, 5) . $typeName;
         $txt .= "\n";
         $txt .= "\n";
-        $txt .= "懂嗎 孩子？就是在講你 一定會問我一台幣=多少" . $typeName;
+        $txt .= "懂嗎 孩子？";
         $txt .= "\n";
         $txt .= "就是在講你 !! 一定會問我一台幣等於多少" . $typeName;
         $txt .= "\n";
