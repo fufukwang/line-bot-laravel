@@ -25,6 +25,7 @@ class botController extends Controller
         $jsonString = file_get_contents('php://input');
         $jsonObject = json_decode($bot->getJSONDecodedBody());
 
+        file_put_contents("php://stderr", "in".PHP_EOL);
         file_put_contents("php://stderr", "$jsonString".PHP_EOL);
         file_put_contents("php://stderr", "$jsonObject".PHP_EOL);
 
