@@ -122,12 +122,13 @@ class botController extends Controller
         $txt .= "\n";
         $txt .= "賣出即期 : " . $money->sellSpot;
         $txt .= "\n";
-        $txt .= "所以買入一台幣 = " . round(1 / $money->buySpot, 5) . "$typeName";
+        $txt .= "所以買入一台幣 = " . round(1 / $money->buySpot, 5) . $typeName;
         $txt .= "\n";
-        $txt .= "懂嗎 孩子？就是在講你 一定會問我一台幣=多少";
+        $txt .= "\n";
+        $txt .= "懂嗎 孩子？就是在講你 一定會問我一台幣=多少" . $typeName;
         $txt .= "\n";
         $txt .= "(╯°□°)╯︵ ┻━┻";
-
+        $txt .= "\n";
         $txt .= "更新時間 : " . Carbon::createFromTimestamp($sourceData->updateTime)->format('Y-m-d H:i:s');
 
         return $txt;
