@@ -3,18 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use File;
 
 class botController extends Controller
 {
     public function test()
     {
-
     }
 
     public function callBack()
     {
-        file_put_contents("php://stderr", "hello, this is a test!\n");
+        file_put_contents("php://stderr", "sending push !!!".PHP_EOL);
         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('CHANNEL_ACCESS_TOKEN'));
         $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('CHANNEL_SECRET')]);
 
@@ -22,9 +20,9 @@ class botController extends Controller
         $body = file_get_contents("php://input");
         try {
           $events = $bot->parseEventRequest($body, $signature);
-          File::put(base_path() . '/report.txt', $events);
+          file_put_contents("php://stderr", "$events".PHP_EOL);
         } catch (Exception $e) {
-          File::put(base_path() . '/report.txt', $e); //錯誤內容
+          file_put_contents("php://stderr", "$e".PHP_EOL);
         }
 
     }
