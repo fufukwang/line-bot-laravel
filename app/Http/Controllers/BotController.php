@@ -90,6 +90,10 @@ class botController extends Controller
                 $money = $sourceData->rates->EUR;
                 break;
 
+            case '印尼盾':
+                $money = $sourceData->rates->IDR;
+                break;
+
             case '泰銖':
             case '泰珠':
             case '泰豬':
