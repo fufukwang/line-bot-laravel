@@ -84,8 +84,16 @@ class botController extends Controller
                 $money = $sourceData->rates->GBP;
                 break;
 
+            case '印尼盾':
+                $money = $sourceData->rates->IDR;
+                break;
+
             case '港幣':
                 $money = $sourceData->rates->HKD;
+                break;
+
+            case '韓幣':
+                $money = $sourceData->rates->KRW;
                 break;
 
             case '澳幣':
@@ -94,10 +102,6 @@ class botController extends Controller
 
             case '歐元':
                 $money = $sourceData->rates->EUR;
-                break;
-
-            case '印尼盾':
-                $money = $sourceData->rates->IDR;
                 break;
 
             case '泰銖':
