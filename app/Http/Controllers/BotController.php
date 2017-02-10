@@ -6,9 +6,6 @@ use Illuminate\Http\Request;
 
 class botController extends Controller
 {
-    public function test()
-    {
-    }
 
     public function callBack()
     {
