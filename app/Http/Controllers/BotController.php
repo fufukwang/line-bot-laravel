@@ -14,7 +14,7 @@ class botController extends Controller
     {
         $token = env('CHANNEL_ACCESS_TOKEN');
         $secret = env('CHANNEL_SECRET');
-        file_put_contents("php://stderr", "$token".PHP_EOL);
+        file_put_contents("php://stderr", "$secret".PHP_EOL);
 
         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('CHANNEL_ACCESS_TOKEN'));
         $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('CHANNEL_SECRET')]);
