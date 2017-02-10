@@ -37,11 +37,7 @@ class botController extends Controller
         file_put_contents("php://stderr", "$mid".PHP_EOL);
         file_put_contents("php://stderr", "$text".PHP_EOL);
 
-        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text);
-        $response = $bot->replyMessage($replyToken, $textMessageBuilder);
-        if ($response->isSucceeded()) {
-            file_put_contents("php://stderr", "ok".PHP_EOL);
-            return;
-        }
+        $bot->sendText($replyToken, $text);
+        return;
     }
 }
