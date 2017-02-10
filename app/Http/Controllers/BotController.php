@@ -57,22 +57,23 @@ class botController extends Controller
         switch ($typeName) {
             case '日幣':
                 $money = $sourceData->rates->JPY;
-
-                //to string
-                $txt = "買入現金 : " . $money->buyCash;
-                $txt .= "\n";
-                $txt .= "買入即期 : " . $money->buySpot;
-                $txt .= "\n";
-                $txt .= "賣出現金 : " . $money->sellCash;
-                $txt .= "\n";
-                $txt .= "賣出即期 : " . $money->sellSpot;
-                $txt .= "\n";
-                $txt .= "更新時間 : " . Carbon::createFromTimestamp($sourceData->updateTime)->format('Y-m-d H:i:s');
-
-                return $txt;
+                break;
 
             default:
                 return '';
         }
+
+        //to string
+        $txt = "買入現金 : " . $money->buyCash;
+        $txt .= "\n";
+        $txt .= "買入即期 : " . $money->buySpot;
+        $txt .= "\n";
+        $txt .= "賣出現金 : " . $money->sellCash;
+        $txt .= "\n";
+        $txt .= "賣出即期 : " . $money->sellSpot;
+        $txt .= "\n";
+        $txt .= "更新時間 : " . Carbon::createFromTimestamp($sourceData->updateTime)->format('Y-m-d H:i:s');
+
+        return $txt;
     }
 }
