@@ -21,16 +21,13 @@ class botController extends Controller
         );
 
         $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-        $body = file_get_contents("php://input");
-        file_put_contents("php://stderr", "json_decode($body)".PHP_EOL);
 
-        try {
-            $events = $bot->parseEventRequest($body, $signature);
-            $json = json_encode($events);
-            file_put_contents("php://stderr", "$json".PHP_EOL);
-        } catch (Exception $e) {
-            file_put_contents("php://stderr", "$e".PHP_EOL);
-        }
+        $jsonString = file_get_contents('php://input');
+        $jsonObject = json_decode($jsonString);
+
+        file_put_contents("php://stderr", "$jsonObject".PHP_EOL);
+
+
 
     }
 }
