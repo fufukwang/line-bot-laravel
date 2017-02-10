@@ -131,6 +131,9 @@ class botController extends Controller
                 return '負二代';
             case "岳群存款":
                 return '八七日圓';
+            case "Raiden":
+            case "raiden":
+                return '台灣雲端運算首席專案經理';
             case "540存款":
                 return '九四八七日圓';
             case '安安 惠律姐':
