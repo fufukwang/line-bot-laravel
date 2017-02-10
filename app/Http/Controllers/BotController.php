@@ -36,6 +36,7 @@ class botController extends Controller
         $currency = json_decode($content);
 
         $result = $this->changeName($text, $currency);
+        file_put_contents("php://stderr", "$text".PHP_EOL);
         file_put_contents("php://stderr", "json_encode($result)".PHP_EOL);
 
         /*if ( ! empty($result)) {
