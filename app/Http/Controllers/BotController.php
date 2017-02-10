@@ -55,17 +55,7 @@ class botController extends Controller
      */
     public function changeName($typeName, $sourceData)
     {
-        //XDD have fun
-        $funny = $this->funny($typeName);
-        if ( ! empty($funny)) {
-            return $funny;
-        }
 
-        //麻將
-        $maJohn = $this->maJohn($typeName);
-        if ( ! empty($maJohn)) {
-            return $maJohn;
-        }
 
         switch ($typeName) {
             case '日幣':
