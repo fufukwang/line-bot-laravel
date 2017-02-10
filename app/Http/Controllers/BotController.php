@@ -18,7 +18,6 @@ class botController extends Controller
         $currency = json_decode($content);
 
         $result = $this->changeName('韓幣', $currency);
-        dd($result);
     }
 
     public function callBack()
