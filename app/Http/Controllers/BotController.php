@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Log;
 
 class botController extends Controller
 {
@@ -15,7 +14,7 @@ class botController extends Controller
     {
         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('CHANNEL_ACCESS_TOKEN'));
         $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('CHANNEL_SECRET')]);
-        Log::info('testtesttesttesttesttest');
+        file_put_contents("php://stderr", "sending push !!!".PHP_EOL);
 
         /*$signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
         $body = file_get_contents("php://input");
