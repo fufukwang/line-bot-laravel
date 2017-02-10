@@ -62,6 +62,12 @@ class botController extends Controller
             return $funny;
         }
 
+        //麻將
+        $maJohn = $this->maJohn($typeName);
+        if ( ! empty($maJohn)) {
+            return $maJohn;
+        }
+
         switch ($typeName) {
             case '日幣':
             case '日圓':
@@ -121,6 +127,14 @@ class botController extends Controller
         return $txt;
     }
 
+    public function maJohn($typeName)
+    {
+        switch ($typeName) {
+            default:
+                return '';
+        }
+    }
+
     public function funny($typeName)
     {
         switch (strtoupper($typeName)) {
@@ -138,6 +152,8 @@ class botController extends Controller
                 return '幹麻 裝熟？';
             case 540:
                 return 487;
+            case 487:
+                return 540;
             default:
                 return '';
         }
