@@ -73,6 +73,29 @@ class botController extends Controller
                 $money = $sourceData->rates->USD;
                 break;
 
+            case '英鎊':
+            case '英金':
+                $money = $sourceData->rates->GBP;
+                break;
+
+            case '港幣':
+                $money = $sourceData->rates->HKD;
+                break;
+
+            case '澳幣':
+                $money = $sourceData->rates->AUD;
+                break;
+
+            case '歐元':
+                $money = $sourceData->rates->EUR;
+                break;
+
+            case '泰銖':
+            case '泰珠':
+            case '泰豬':
+                $money = $sourceData->rates->THB;
+                break;
+
             case '人民幣':
                 $money = $sourceData->rates->CNY;
                 break;
@@ -97,8 +120,6 @@ class botController extends Controller
     public function funny($typeName)
     {
         switch ($typeName) {
-            case '540':
-                return 487;
             case "老公存款":
                 return '八億七千萬';
             case "quni":
@@ -110,6 +131,8 @@ class botController extends Controller
                 return '九四八七日圓';
             case '安安 惠律姐':
                 return '幹麻 裝熟？';
+            case 540:
+                return 487;
             default:
                 return '';
         }
