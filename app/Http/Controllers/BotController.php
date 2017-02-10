@@ -127,6 +127,9 @@ class botController extends Controller
         $txt .= "\n";
         $txt .= "懂嗎 孩子？就是在講你 一定會問我一台幣=多少" . $typeName;
         $txt .= "\n";
+        $txt .= "就是在講你 !! 一定會問我一台幣等於多少" . $typeName;
+        $txt .= "\n";
+        $txt .= "\n";
         $txt .= "(╯°□°)╯︵ ┻━┻";
         $txt .= "\n";
         $txt .= "更新時間 : " . Carbon::createFromTimestamp($sourceData->updateTime)->format('Y-m-d H:i:s');
