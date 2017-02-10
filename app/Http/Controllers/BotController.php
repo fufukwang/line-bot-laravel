@@ -60,13 +60,13 @@ class botController extends Controller
 
                 //to string
                 $txt = '買入現金 : ' . $money->buyCash;
-                $txt .= '<br>';
+                $txt .= ' %0D%0A ';
                 $txt .= '買入即期 : ' . $money->buySpot;
-                $txt .= '<br>';
+                $txt .= ' %0D%0A ';
                 $txt .= '賣出現金 : ' . $money->sellCash;
-                $txt .= '<br>';
+                $txt .= ' %0D%0A ';
                 $txt .= '賣出即期 : ' . $money->sellSpot;
-                $txt .= '<br>';
+                $txt .= ' %0D%0A ';
                 $txt .= '更新時間 : ' . Carbon::createFromTimestamp($sourceData->updateTime)->format('Y-m-d H:i:s');
 
                 return $txt;
