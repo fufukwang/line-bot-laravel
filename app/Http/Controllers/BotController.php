@@ -36,6 +36,7 @@ class botController extends Controller
         $currency = json_decode($content);
 
         $result = $this->changeName($text, $currency);
+
         file_put_contents("php://stderr", "$text".PHP_EOL);
         file_put_contents("php://stderr", "$result".PHP_EOL);
 
@@ -54,11 +55,25 @@ class botController extends Controller
      */
     public function changeName($typeName, $sourceData)
     {
+        //XDD
+        if ($typeName == '540') {
+            return '487';
+        }
+
         switch ($typeName) {
             case '日幣':
+            case '日圓':
                 $money = $sourceData->rates->JPY;
                 break;
 
+            case '美元':
+            case '美金':
+                $money = $sourceData->rates->USD;
+                break;
+
+            case '人民幣':
+                $money = $sourceData->rates->CNY;
+                break;
             default:
                 return '';
         }
