@@ -13,8 +13,8 @@ class botController extends Controller
     public function callBack()
     {
         $token = env('CHANNEL_ACCESS_TOKEN');
-        $secret = env('CHANNEL_ACCESS_TOKEN');
-        file_put_contents("php://stderr", "$secret . $token".PHP_EOL);
+        $secret = env('CHANNEL_SECRET');
+        file_put_contents("php://stderr", "$token".PHP_EOL);
 
         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('CHANNEL_ACCESS_TOKEN'));
         $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('CHANNEL_SECRET')]);
