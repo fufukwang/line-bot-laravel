@@ -181,6 +181,16 @@ class botController extends Controller
                 return 'https://www.facebook.com/photo.php?fbid=10152956691594145&set=pb.729219144.-2207520000.1486717409.&type=3&theater';
             case "540存款":
                 return '九四八七日圓';
+
+            case "晚上想吃什麼":
+            case "晚上吃什麼":
+            case "晚上要吃什麼":
+            case "晚上吃?":
+                return '不知道耶你說呢';
+
+            case "不知道耶你說呢":
+                return '不知道耶你說呢';
+
             case '安安 惠律姐':
                 return '幹麻 裝熟？';
             case 540:
