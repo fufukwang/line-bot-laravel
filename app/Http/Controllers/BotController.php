@@ -39,18 +39,11 @@ class botController extends Controller
         file_put_contents("php://stderr", "$text".PHP_EOL);
 
         if ( ! empty($result)) {
-            //send
-            $msg = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
-            $num = 0;
-            foreach ($result as $key => $value) {
-                $sendMsg = $key . " : " . $value;
-                file_put_contents("php://stderr", "$sendMsg".PHP_EOL);
-                $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($sendMsg, $num);
-                $msg->add($replyToken, $textMessageBuilder);
-                $num++;
+                //send
+                file_put_contents("php://stderr", "$result".PHP_EOL);
+                $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($result);
+                $bot->replyMessage($replyToken, $textMessageBuilder);
             }
-
-            $bot->replyMessage($replyToken, $msg);
         }
     }
 
@@ -65,16 +58,21 @@ class botController extends Controller
             case '日幣':
                 $money = $sourceData->rates->JPY;
 
-                return [
-                    '買入現金' => $money->buyCash,
-                    '買入即期' => $money->buySpot,
-                    '賣出現金' => $money->sellCash,
-                    '賣出即期' => $money->sellSpot,
-                    '更新時間' => Carbon::createFromTimestamp($sourceData->updateTime)->format('Y-m-d H:i:s'),
-                ];
+                //to string
+                $txt = '買入現金 : ' . $money->buyCash;
+                $txt .= '\n ';
+                $txt .= '買入即期 : ' . $money->buySpot;
+                $txt .= '\n ';
+                $txt .= '賣出現金 : ' . $money->sellCash;
+                $txt .= '\n ';
+                $txt .= '賣出即期 : ' . $money->sellSpot;
+                $txt .= '\n ';
+                $txt .= '更新時間 : ' . Carbon::createFromTimestamp($sourceData->updateTime)->format('Y-m-d H:i:s');
+
+                return $txt;
 
             default:
-                return [];
+                return '';
         }
     }
 }
