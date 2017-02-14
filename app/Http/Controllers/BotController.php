@@ -28,10 +28,10 @@ class botController extends Controller
 
     public function sendMsg()
     {
-        $post = Request::all();
+        /*$post = Request::all();
 
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($post['msg']);
-        $this->bot->replyMessage($post['token'], $textMessageBuilder);
+        $this->bot->replyMessage($post['token'], $textMessageBuilder);*/
     }
 
     public function callBack()
@@ -72,6 +72,8 @@ class botController extends Controller
             //send
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($result);
             $this->bot->replyMessage($replyToken, $textMessageBuilder);
+        } else {
+            file_put_contents("php://stderr", " ".PHP_EOL);
         }
     }
 
