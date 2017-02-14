@@ -46,7 +46,7 @@ class botController extends Controller
         file_put_contents("php://stderr", "$jsonString".PHP_EOL);
 
         //get info
-        /*$replyToken = $decode->events[0]->replyToken;
+        $replyToken = $decode->events[0]->replyToken;
         $text = $decode->events[0]->message->text;
         $messageId = $decode->events[0]->message->id;
         $type = $decode->events[0]->source->type;
@@ -70,7 +70,7 @@ class botController extends Controller
             //send
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($result);
             $this->bot->replyMessage($replyToken, $textMessageBuilder);
-        }*/
+        }
     }
 
     /*
