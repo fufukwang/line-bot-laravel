@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('callBack', 'BotController@callBack');
 Route::get('test', 'BotController@test');
+Route::post('sendMsg', 'BotController@sendMsg');

@@ -2,30 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Request;
 
 class botController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->bot = new \LINE\LINEBot(
+          new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('CHANNEL_ACCESS_TOKEN')),
+          ['channelSecret' => env('CHANNEL_SECRET')]
+        );
+    }
+
     public function test()
     {
         //test string
         $lineTestString = '{"events":[{"type":"message","replyToken":"e593a9cc1e834791bf8076f6ff8ec116","source":{"userId":"U7cbf49ac38f334e5977af0d737c5bae0","type":"user"},"timestamp":1486692739451,"message":{"type":"text","id":"5625522229919","text":"22"}}]}';
-        $decode = json_decode($lineTestString);
+
+        $decodeString = json_decode($lineTestString);
+
+        return $lineTestString;
+    }
+
+    public function sendMsg()
+    {
+        $post = Request::all();
+
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($post['msg']);
+        $this->bot->replyMessage($post['token'], $textMessageBuilder);
     }
 
     public function callBack()
     {
-        //config
-        $token = env('CHANNEL_ACCESS_TOKEN');
-        $secret = env('CHANNEL_SECRET');
-
-        //init setting
-        $bot = new \LINE\LINEBot(
-          new \LINE\LINEBot\HTTPClient\CurlHTTPClient($token),
-          ['channelSecret' => $secret]
-        );
-
         //get line content
         $jsonString = file_get_contents('php://input');
         $decode = json_decode($jsonString);
@@ -37,12 +47,11 @@ class botController extends Controller
         $userId = $decode->events[0]->source->userId;
 
         //get user profile
-        $response = $bot->getProfile($userId);
+        $response = $this->bot->getProfile($userId);
         $profile = $response->getJSONDecodedBody();
         $displayName = $profile['displayName'];
 
         //json all infor
-
         $replyJson = json_encode([
             'replyToken' => $replyToken
         ]);
@@ -57,13 +66,10 @@ class botController extends Controller
 
         $result = $this->changeName($text, $currency);
 
-        //reply message
-        //file_put_contents("php://stderr", "$result".PHP_EOL);
-
         if ( ! empty($result)) {
             //send
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($result);
-            $bot->replyMessage($replyToken, $textMessageBuilder);
+            $this->bot->replyMessage($replyToken, $textMessageBuilder);
         }
     }
 
