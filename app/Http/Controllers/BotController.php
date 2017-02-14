@@ -11,13 +11,7 @@ class botController extends Controller
     {
         //test string
         $lineTestString = '{"events":[{"type":"message","replyToken":"e593a9cc1e834791bf8076f6ff8ec116","source":{"userId":"U7cbf49ac38f334e5977af0d737c5bae0","type":"user"},"timestamp":1486692739451,"message":{"type":"text","id":"5625522229919","text":"22"}}]}';
-
-
-        //api
-        $content = file_get_contents('http://asper-bot-rates.appspot.com/currency.json');
-        $currency = json_decode($content);
-
-        $result = $this->changeName('韓幣', $currency);
+        $decode = json_decode($lineTestString);
     }
 
     public function callBack()
@@ -38,13 +32,15 @@ class botController extends Controller
         $text = $decode->events[0]->message->text;
         $userId = $decode->events[0]->source->userId;
 
-        $response = $bot->getProfile($userId);
-
-        file_put_contents("php://stderr", "json_encode($response->getJSONDecodedBody())".PHP_EOL);
-
         file_put_contents("php://stderr", "$jsonString".PHP_EOL);
         file_put_contents("php://stderr", "$text".PHP_EOL);
 
+        $response = $bot->getProfile($userId);
+        $profile = $response->getJSONDecodedBody();
+        $decodePro = json_encode($profile);
+
+        file_put_contents("php://stderr", "$decodePro
+            ".PHP_EOL);
 
         //匯率api
         $content = file_get_contents('http://asper-bot-rates.appspot.com/currency.json');
