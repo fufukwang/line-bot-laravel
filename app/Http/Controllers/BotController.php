@@ -48,10 +48,10 @@ class botController extends Controller
 
         //get user profile
         $response = $this->bot->getProfile($userId);
-        $profile = $response->getJSONDecodedBody();
-        $displayName = $profile['displayName'];
 
         if ($response->isSucceeded()) {
+            $profile = $response->getJSONDecodedBody();
+            $displayName = $profile['displayName'];
             //json all infor
             $replyJson = json_encode([
                 'replyToken' => $replyToken
