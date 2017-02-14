@@ -8,6 +8,8 @@ use Request;
 class botController extends Controller
 {
 
+    const SEND_EXP = 'curl -X POST "https://line-bot-laravel.herokuapp.com/api/sendMsg" -d "msg=哈哈哈&id=5645109842927"';
+
     public function __construct()
     {
         $this->bot = new \LINE\LINEBot(
@@ -46,11 +48,17 @@ class botController extends Controller
         //get info
         $replyToken = $decode->events[0]->replyToken;
         $text = $decode->events[0]->message->text;
+        $messageId = $decode->events[0]->message->id;
         $type = $decode->events[0]->source->type;
         $userMessage = 'Message : ' . $text;
 
         file_put_contents("php://stderr", "$type".PHP_EOL);
         file_put_contents("php://stderr", "$userMessage".PHP_EOL);
+
+        //content
+        $response = $bot->getMessageContent($messageId);
+        $contentString = json_encode($response->getRawBody());
+        file_put_contents("php://stderr", "$contentString".PHP_EOL);
 
         //匯率api
         $content = file_get_contents('http://asper-bot-rates.appspot.com/currency.json');
