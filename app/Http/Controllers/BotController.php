@@ -21,6 +21,8 @@ class botController extends Controller
         //test string
         $lineTestString = '{"events":[{"type":"message","replyToken":"e593a9cc1e834791bf8076f6ff8ec116","source":{"userId":"U7cbf49ac38f334e5977af0d737c5bae0","type":"user"},"timestamp":1486692739451,"message":{"type":"text","id":"5625522229919","text":"22"}}]}';
 
+        $group = '{"events":[{"type":"message","replyToken":"16d90d0e02dd4da388760334fb9ae789","source":{"groupId":"C0b8a5178b21bae67b43057dfa5cf60fa","type":"group"},"timestamp":1487050514925,"message":{"type":"text","id":"5644977294348","text":"540"}}]}';
+
         $decodeString = json_decode($lineTestString);
 
         return $lineTestString;
@@ -45,6 +47,11 @@ class botController extends Controller
         $replyToken = $decode->events[0]->replyToken;
         $text = $decode->events[0]->message->text;
         $type = $decode->events[0]->type;
+
+        $mid = $decode->events[0]->message->id;
+        $response = $bot->getMessageContent($mid);
+        $testjson = json_encode($response->getRawBody());
+        file_put_contents("php://stderr", "$testjson".PHP_EOL);
 
         if ( $type == 'user') {
             //get 1:1 user profile
