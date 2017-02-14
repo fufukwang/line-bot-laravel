@@ -43,12 +43,12 @@ class botController extends Controller
         //get info
         $replyToken = $decode->events[0]->replyToken;
         $text = $decode->events[0]->message->text;
+        $userId = $decode->events[0]->source->userId;
 
         //get 1:1 user profile
         $response = $this->bot->getProfile($userId);
 
         if ($response->isSucceeded()) {
-            $userId = $decode->events[0]->source->userId;
             $profile = $response->getJSONDecodedBody();
             $displayName = $profile['displayName'];
             //json all infor
