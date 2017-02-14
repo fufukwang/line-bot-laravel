@@ -28,10 +28,10 @@ class botController extends Controller
 
     public function sendMsg()
     {
-        /*$post = Request::all();
+        $post = Request::all();
 
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($post['msg']);
-        $this->bot->replyMessage($post['token'], $textMessageBuilder);*/
+        $this->bot->replyMessage($post['token'], $textMessageBuilder);
     }
 
     public function callBack()
@@ -44,7 +44,7 @@ class botController extends Controller
         $replyToken = $decode->events[0]->replyToken;
         $mid = $decode->events[0]->message->id;
         $text = $decode->events[0]->message->text;
-        $userId = $decode->events[0]->source->userId;
+        //$userId = $decode->events[0]->source->userId;
 
         //get user profile
         /*$response = $this->bot->getProfile($userId);
