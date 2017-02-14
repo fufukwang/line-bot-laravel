@@ -49,8 +49,8 @@ class botController extends Controller
         $type = $decode->events[0]->type;
 
         $mid = $decode->events[0]->message->id;
-        $response = $bot->getMessageContent($mid);
-        $testjson = json_encode($response->getRawBody());
+        $response1 = $this->bot->getMessageContent($mid);
+        $testjson = json_encode($response1->getRawBody());
         file_put_contents("php://stderr", "$testjson".PHP_EOL);
 
         if ( $type == 'user') {
