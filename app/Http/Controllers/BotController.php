@@ -34,10 +34,11 @@ class botController extends Controller
     {
         $post = Request::all();
         $msg = $post['msg'];
+        $sendMsg = 'Your Message : ' . $post['msg'];
 
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($msg);
         $this->bot->pushMessage($post['id'], $textMessageBuilder);
-        file_put_contents("php://stderr", "$msg".PHP_EOL);
+        file_put_contents("php://stderr", "$sendMsg".PHP_EOL);
     }
 
     public function callBack()
