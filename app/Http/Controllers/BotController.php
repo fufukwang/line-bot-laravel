@@ -57,7 +57,7 @@ class botController extends Controller
 
         //content
         $response = $this->bot->getMessageContent($messageId);
-        $contentString = json_encode($response->getRawBody());
+        $contentString = json_encode($response->getJSONDecodedBody());
         file_put_contents("php://stderr", "$contentString".PHP_EOL);
 
         //匯率api
