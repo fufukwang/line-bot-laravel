@@ -56,7 +56,7 @@ class botController extends Controller
         file_put_contents("php://stderr", "$userMessage".PHP_EOL);
 
         //content
-        $response = $bot->getMessageContent($messageId);
+        $response = $this->bot->getMessageContent($messageId);
         $contentString = json_encode($response->getRawBody());
         file_put_contents("php://stderr", "$contentString".PHP_EOL);
 
