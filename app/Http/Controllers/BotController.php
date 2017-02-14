@@ -45,9 +45,6 @@ class botController extends Controller
         $decode = json_decode($jsonString);
         file_put_contents("php://stderr", "$jsonString".PHP_EOL);
 
-        $testContent = file_get_contents('https://'.$_SERVER['SERVER_NAME'].'/LINE/' . json_encode($jsonString));
-        file_put_contents("php://stderr", "$testContent".PHP_EOL);
-
         //get info
         $replyToken = $decode->events[0]->replyToken;
         $text = $decode->events[0]->message->text;
