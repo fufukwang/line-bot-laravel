@@ -52,8 +52,6 @@ class botController extends Controller
         $type = $decode->events[0]->source->type;
         $userMessage = 'Message : ' . $text;
 
-        file_put_contents("php://stderr", "$type".PHP_EOL);
-        file_put_contents("php://stderr", "$type".PHP_EOL);
 
         if ($type == 'user') {
             $sendId = $messageId;
@@ -65,8 +63,10 @@ class botController extends Controller
         $echoId = 'id : ' . $sendId;
         $response = $this->bot->getMessageContent($sendId);
         $contentString = json_encode($response);
+
+        file_put_contents("php://stderr", "$type".PHP_EOL);
         file_put_contents("php://stderr", "$echoId".PHP_EOL);
-        file_put_contents("php://stderr", "$contentString".PHP_EOL);
+        file_put_contents("php://stderr", "$userMessage".PHP_EOL);
 
         //匯率api
         $content = file_get_contents('http://asper-bot-rates.appspot.com/currency.json');
