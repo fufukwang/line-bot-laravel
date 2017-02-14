@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use LINE\LINEBot\HTTPClient\GuzzleHTTPClient;
 
 class botController extends Controller
 {
@@ -30,23 +31,34 @@ class botController extends Controller
           ['channelSecret' => $secret]
         );
 
+
         $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 
         $jsonString = file_get_contents('php://input');
         $decode = json_decode($jsonString);
 
+        // Set these values
+        $config = [
+            'channelId' => '1500404216',
+            'channelSecret' => $secret,
+        ];
+        sdk = new LINEBot($config, new GuzzleHTTPClient($config));
+        $messages = $sdk->createReceivesFromJSON($postdata);
+        file_put_contents("php://stderr", "json_encode($messages)".PHP_EOL);
+
         $replyToken = $decode->events[0]->replyToken;
         $mid = $decode->events[0]->message->id;
         $text = $decode->events[0]->message->text;
 
-        //api
+        file_put_contents("php://stderr", "$jsonString".PHP_EOL);
+        file_put_contents("php://stderr", "$text".PHP_EOL);
+
+
+        //匯率api
         $content = file_get_contents('http://asper-bot-rates.appspot.com/currency.json');
         $currency = json_decode($content);
 
         $result = $this->changeName($text, $currency);
-
-        file_put_contents("php://stderr", "$jsonString".PHP_EOL);
-        file_put_contents("php://stderr", "$text".PHP_EOL);
 
         //reply message
         //file_put_contents("php://stderr", "$result".PHP_EOL);
