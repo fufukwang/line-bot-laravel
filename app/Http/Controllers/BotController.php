@@ -42,7 +42,7 @@ class botController extends Controller
             'channelId' => '1500404216',
             'channelSecret' => $secret,
         ];
-        $sdk = new LINEBot($config, new GuzzleHTTPClient($config));
+        $sdk = new \LINE\LINEBot($config, new GuzzleHTTPClient($config));
         $messages = $sdk->createReceivesFromJSON($postdata);
         file_put_contents("php://stderr", "json_encode($messages)".PHP_EOL);
 
