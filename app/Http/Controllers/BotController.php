@@ -36,10 +36,12 @@ class botController extends Controller
         $replyToken = $decode->events[0]->replyToken;
         $mid = $decode->events[0]->message->id;
         $text = $decode->events[0]->message->text;
+        $userId = $decode->events[0]->source->userId;
 
-        /*$response = $bot->getMessageContent($mid);
+        $response = $bot->getProfile($userId);
 
-        file_put_contents("php://stderr", "json_encode($response->getRawBody())".PHP_EOL);*/
+        file_put_contents("php://stderr", "json_encode($response->getJSONDecodedBody())".PHP_EOL);
+
         file_put_contents("php://stderr", "$jsonString".PHP_EOL);
         file_put_contents("php://stderr", "$text".PHP_EOL);
 
