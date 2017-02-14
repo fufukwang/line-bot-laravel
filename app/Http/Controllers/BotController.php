@@ -40,8 +40,13 @@ class botController extends Controller
         $response = $bot->getProfile($userId);
         $profile = $response->getJSONDecodedBody();
         $displayName = $profile['displayName'];
+
         //json all infor
-        file_put_contents("php://stderr", "$jsonString".PHP_EOL);
+
+        $replyJson = json_encode([
+            'replyToken' => $replyToken
+        ]);
+        file_put_contents("php://stderr", "$replyJson".PHP_EOL);
         //message
         $fullMessage = $displayName . ' : ' . $text;
         file_put_contents("php://stderr", "$fullMessage".PHP_EOL);
