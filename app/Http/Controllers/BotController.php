@@ -16,31 +16,35 @@ class botController extends Controller
 
     public function callBack()
     {
+        //config
         $token = env('CHANNEL_ACCESS_TOKEN');
         $secret = env('CHANNEL_SECRET');
 
+        //init setting
         $bot = new \LINE\LINEBot(
           new \LINE\LINEBot\HTTPClient\CurlHTTPClient($token),
           ['channelSecret' => $secret]
         );
 
+        //get line content
         $jsonString = file_get_contents('php://input');
         $decode = json_decode($jsonString);
 
+        //get info
         $replyToken = $decode->events[0]->replyToken;
         $mid = $decode->events[0]->message->id;
         $text = $decode->events[0]->message->text;
         $userId = $decode->events[0]->source->userId;
 
-        file_put_contents("php://stderr", "$jsonString".PHP_EOL);
-        file_put_contents("php://stderr", "$text".PHP_EOL);
-
+        //get user profile
         $response = $bot->getProfile($userId);
         $profile = $response->getJSONDecodedBody();
-        $decodePro = json_encode($profile);
+        $displayName = $profile['displayName'];
 
-        file_put_contents("php://stderr", "$decodePro
-            ".PHP_EOL);
+        //message
+        $fullMessage = $displayName . ' : ' . $text;
+
+        file_put_contents("php://stderr", "$fullMessage".PHP_EOL);
 
         //匯率api
         $content = file_get_contents('http://asper-bot-rates.appspot.com/currency.json');
