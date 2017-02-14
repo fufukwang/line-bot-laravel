@@ -33,7 +33,7 @@ class botController extends Controller
         $post = Request::all();
 
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($post['msg']);
-        $this->bot->replyMessage($post['token'], $textMessageBuilder);
+        $this->bot->pushMessage($post['id'], $textMessageBuilder);
     }
 
     public function callBack()
@@ -47,9 +47,10 @@ class botController extends Controller
         $replyToken = $decode->events[0]->replyToken;
         $text = $decode->events[0]->message->text;
         $type = $decode->events[0]->source->type;
+        $userMessage = 'Message : ' . $text;
 
         file_put_contents("php://stderr", "$type".PHP_EOL);
-        file_put_contents("php://stderr", "$text".PHP_EOL);
+        file_put_contents("php://stderr", "$userMessage".PHP_EOL);
 
         //匯率api
         $content = file_get_contents('http://asper-bot-rates.appspot.com/currency.json');
