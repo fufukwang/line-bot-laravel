@@ -46,26 +46,10 @@ class botController extends Controller
         //get info
         $replyToken = $decode->events[0]->replyToken;
         $text = $decode->events[0]->message->text;
-        $type = $decode->events[0]->type;
+        $type = $decode->events[0]->source->type;
 
-        if ( $type == 'user') {
-            //get 1:1 user profile
-            $userId = $decode->events[0]->source->userId;
-            $response = $this->bot->getProfile($userId);
-
-            if ($response->isSucceeded()) {
-                $profile = $response->getJSONDecodedBody();
-                $displayName = $profile['displayName'];
-                //json all infor
-                $replyJson = json_encode([
-                    'replyToken' => $replyToken
-                ]);
-                file_put_contents("php://stderr", "$replyJson".PHP_EOL);
-                //message
-                $fullMessage = $displayName . ' : ' . $text;
-                file_put_contents("php://stderr", "$fullMessage".PHP_EOL);
-            }
-        }
+        file_put_contents("php://stderr", "$type".PHP_EOL);
+        file_put_contents("php://stderr", "$text".PHP_EOL);
 
         //匯率api
         $content = file_get_contents('http://asper-bot-rates.appspot.com/currency.json');
