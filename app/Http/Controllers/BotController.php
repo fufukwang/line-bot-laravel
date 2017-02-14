@@ -47,28 +47,24 @@ class botController extends Controller
         $replyToken = $decode->events[0]->replyToken;
         $text = $decode->events[0]->message->text;
         $type = $decode->events[0]->type;
-        $mid = $decode->events[0]->message->id;
 
         if ( $type == 'user') {
             //get 1:1 user profile
             $userId = $decode->events[0]->source->userId;
-        } else if ( $type == 'group') {
-            $userId = $decode->events[0]->source->groupId;
-        }
+            $response = $this->bot->getProfile($userId);
 
-        $response = $this->bot->getProfile($userId);
-
-        if ($response->isSucceeded()) {
-            $profile = $response->getJSONDecodedBody();
-            $displayName = $profile['displayName'];
-            //json all infor
-            $replyJson = json_encode([
-                'replyToken' => $replyToken
-            ]);
-            file_put_contents("php://stderr", "$replyJson".PHP_EOL);
-            //message
-            $fullMessage = $displayName . ' : ' . $text;
-            file_put_contents("php://stderr", "$fullMessage".PHP_EOL);
+            if ($response->isSucceeded()) {
+                $profile = $response->getJSONDecodedBody();
+                $displayName = $profile['displayName'];
+                //json all infor
+                $replyJson = json_encode([
+                    'replyToken' => $replyToken
+                ]);
+                file_put_contents("php://stderr", "$replyJson".PHP_EOL);
+                //message
+                $fullMessage = $displayName . ' : ' . $text;
+                file_put_contents("php://stderr", "$fullMessage".PHP_EOL);
+            }
         }
 
         //匯率api
