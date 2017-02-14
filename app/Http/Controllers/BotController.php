@@ -45,10 +45,6 @@ class botController extends Controller
         $decode = json_decode($jsonString);
         file_put_contents("php://stderr", "$jsonString".PHP_EOL);
 
-        $testMsg = json_encode($this->bot->createReceivesFromJSON($jsonString));
-        file_put_contents("php://stderr", "$testMsg".PHP_EOL);
-
-
         //get info
         $replyToken = $decode->events[0]->replyToken;
         $text = $decode->events[0]->message->text;
@@ -61,7 +57,7 @@ class botController extends Controller
 
         //content
         $response = $this->bot->getMessageContent($messageId);
-        $contentString = json_encode($response->getJSONDecodedBody());
+        $contentString = json_encode($response);
         file_put_contents("php://stderr", "$contentString".PHP_EOL);
 
         //匯率api
