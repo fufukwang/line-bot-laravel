@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use LINE\LINEBot\HTTPClient\GuzzleHTTPClient;
 
 class botController extends Controller
 {
@@ -31,25 +30,16 @@ class botController extends Controller
           ['channelSecret' => $secret]
         );
 
-
-        $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-
         $jsonString = file_get_contents('php://input');
         $decode = json_decode($jsonString);
-
-        // Set these values
-        $config = [
-            'channelId' => '1500404216',
-            'channelSecret' => $secret,
-        ];
-        $sdk = new \LINE\LINEBot($config, new GuzzleHTTPClient($config));
-        $messages = $sdk->createReceivesFromJSON($postdata);
-        file_put_contents("php://stderr", "json_encode($messages)".PHP_EOL);
 
         $replyToken = $decode->events[0]->replyToken;
         $mid = $decode->events[0]->message->id;
         $text = $decode->events[0]->message->text;
 
+        $response = $bot->getMessageContent($mid);
+
+        file_put_contents("php://stderr", "json_encode($response->getRawBody())".PHP_EOL);
         file_put_contents("php://stderr", "$jsonString".PHP_EOL);
         file_put_contents("php://stderr", "$text".PHP_EOL);
 
