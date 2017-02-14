@@ -40,10 +40,10 @@ class botController extends Controller
         $response = $bot->getProfile($userId);
         $profile = $response->getJSONDecodedBody();
         $displayName = $profile['displayName'];
-
+        //all infor
+        file_put_contents("php://stderr", "$decode".PHP_EOL);
         //message
         $fullMessage = $displayName . ' : ' . $text;
-
         file_put_contents("php://stderr", "$fullMessage".PHP_EOL);
 
         //匯率api
