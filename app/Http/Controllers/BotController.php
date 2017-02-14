@@ -42,8 +42,9 @@ class botController extends Controller
 
         //get info
         $replyToken = $decode->events[0]->replyToken;
+        $text = $decode->events[0]->message->text;
 
-        //get user profile
+        //get 1:1 user profile
         $response = $this->bot->getProfile($userId);
 
         if ($response->isSucceeded()) {
