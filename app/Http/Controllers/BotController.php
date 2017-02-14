@@ -39,7 +39,7 @@ class botController extends Controller
         //get line content
         $jsonString = file_get_contents('php://input');
         $decode = json_decode($jsonString);
-        file_put_contents("php://stderr", "$jsonString".PHP_EOL);
+
         //get info
         $replyToken = $decode->events[0]->replyToken;
         $mid = $decode->events[0]->message->id;
