@@ -39,17 +39,16 @@ class botController extends Controller
         //get line content
         $jsonString = file_get_contents('php://input');
         $decode = json_decode($jsonString);
-
+        file_put_contents("php://stderr", "$jsonString".PHP_EOL);
         //get info
         $replyToken = $decode->events[0]->replyToken;
         $mid = $decode->events[0]->message->id;
-        $text = $decode->events[0]->message->text;
-        //$userId = $decode->events[0]->source->userId;
 
         //get user profile
-        /*$response = $this->bot->getProfile($userId);
+        $response = $this->bot->getProfile($userId);
 
         if ($response->isSucceeded()) {
+            $userId = $decode->events[0]->source->userId;
             $profile = $response->getJSONDecodedBody();
             $displayName = $profile['displayName'];
             //json all infor
@@ -60,7 +59,7 @@ class botController extends Controller
             //message
             $fullMessage = $displayName . ' : ' . $text;
             file_put_contents("php://stderr", "$fullMessage".PHP_EOL);
-        }*/
+        }
 
         //匯率api
         $content = file_get_contents('http://asper-bot-rates.appspot.com/currency.json');
