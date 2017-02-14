@@ -42,7 +42,6 @@ class botController extends Controller
 
         //get info
         $replyToken = $decode->events[0]->replyToken;
-        $mid = $decode->events[0]->message->id;
 
         //get user profile
         $response = $this->bot->getProfile($userId);
@@ -71,8 +70,6 @@ class botController extends Controller
             //send
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($result);
             $this->bot->replyMessage($replyToken, $textMessageBuilder);
-        } else {
-            file_put_contents("php://stderr", " ".PHP_EOL);
         }
     }
 
