@@ -45,7 +45,7 @@ class botController extends Controller
         $text = $decode->events[0]->message->text;
         $userId = $decode->events[0]->source->userId;
 
-        if ( ! empty($userId)) {
+        if ( ! is_null($userId)) {
             //get 1:1 user profile
             $response = $this->bot->getProfile($userId);
 
